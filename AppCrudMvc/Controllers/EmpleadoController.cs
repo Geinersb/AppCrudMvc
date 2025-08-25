@@ -28,5 +28,6 @@ namespace AppCrudMvc.Controllers
             //aqui retorno la vista con la lista de empleados
             return View(lista);
         }
+        //cuando tengo el motedo le doy en el nombre del metodo click derecho agregar vista, vista de razon vacia
     }
 }
