@@ -35,15 +35,12 @@
                         <td>@item.FechaContrato.ToString("dd/MM/yyyy")</td>
                          <td>@(item.Activo ? "SI": "NO")</td>
                         <td>
-                            @* <a>
-                             Eliminar
-                            </a> *@
+                            <a asp-controller="Empleado" asp-action="Editar" asp-route-id="@item.IdEmpleado" class="btn btn-warning">Editar</a>
 
+                            <a asp-controller="Empleado" asp-action="Eliminar" asp-route-id="@item.IdEmpleado" onclick="return confirmar()" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 }
-
-
 
      </tbody>
       
@@ -52,3 +49,11 @@
 
        </div>
    </div>
+
+ @section Scripts{
+    <script>
+        function confirmar(){
+       return confirm("Esta seguro(a) de eliminar el empleado?")
+        }
+    </script>
+}

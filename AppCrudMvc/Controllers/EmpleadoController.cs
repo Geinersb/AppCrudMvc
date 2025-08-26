@@ -38,6 +38,48 @@ namespace AppCrudMvc.Controllers
             //aqui retorno la vista con la lista de empleados
             return View();
         }
+        //esto lo que realiza es guardar el empleado en la base de datos
+
+        [HttpPost]
+        public async Task <IActionResult> Nuevo(Empleado empleado)
+        {
+            await _appDBContext.Empleados.AddAsync(empleado);
+            await _appDBContext.SaveChangesAsync();
+            //aqui retorno la vista con la lista de empleados
+            return RedirectToAction(nameof(Lista));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int Id)
+        {
+            Empleado empleado = await _appDBContext.Empleados.FirstAsync(e => e.IdEmpleado == Id);
+
+            //aqui retorno la vista con la lista de empleados
+            return View(empleado);
+        }
+
+        //esto lo que realiza es editar el empleado en la base de datos
+        [HttpPost]
+        public async Task<IActionResult> Editar(Empleado empleado)
+        {
+             _appDBContext.Empleados.Update(empleado);
+            await _appDBContext.SaveChangesAsync();
+            //aqui retorno la vista con la lista de empleados
+            return RedirectToAction(nameof(Lista));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int Id)
+        {
+            Empleado empleado = await _appDBContext.Empleados.FirstAsync(e => e.IdEmpleado == Id);
+
+            _appDBContext.Empleados.Remove(empleado);
+            await _appDBContext.SaveChangesAsync();
+            //aqui retorno la vista con la lista de empleados
+            return RedirectToAction(nameof(Lista));
+        }
+
 
     }
 }
